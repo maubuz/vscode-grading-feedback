@@ -22,7 +22,7 @@ class NoteComment implements vscode.Comment {
 
 export function activate(context: vscode.ExtensionContext) {
 	// A `CommentController` is able to provide comments for documents.
-	const commentController = vscode.comments.createCommentController('comment-sample', 'Comment API Sample');
+	const commentController = vscode.comments.createCommentController('grading_feedback', 'Grading Feedback');
 	context.subscriptions.push(commentController);
 
 	// A `CommentingRangeProvider` controls where gutter decorations that allow adding comments are shown
@@ -33,15 +33,15 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	};
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.createNote', (reply: vscode.CommentReply) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.createNote', (reply: vscode.CommentReply) => {
 		replyNote(reply);
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.replyNote', (reply: vscode.CommentReply) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.replyNote', (reply: vscode.CommentReply) => {
 		replyNote(reply);
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.startDraft', (reply: vscode.CommentReply) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.startDraft', (reply: vscode.CommentReply) => {
 		const thread = reply.thread;
 		thread.contextValue = 'draft';
 		const newComment = new NoteComment(reply.text, vscode.CommentMode.Preview, { name: 'vscode' }, thread);
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 		thread.comments = [...thread.comments, newComment];
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.finishDraft', (reply: vscode.CommentReply) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.finishDraft', (reply: vscode.CommentReply) => {
 		const thread = reply.thread;
 
 		if (!thread) {
@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.deleteNoteComment', (comment: NoteComment) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.deleteNoteComment', (comment: NoteComment) => {
 		const thread = comment.parent;
 		if (!thread) {
 			return;
@@ -80,11 +80,11 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.deleteNote', (thread: vscode.CommentThread) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.deleteNote', (thread: vscode.CommentThread) => {
 		thread.dispose();
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.cancelsaveNote', (comment: NoteComment) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.cancelsaveNote', (comment: NoteComment) => {
 		if (!comment.parent) {
 			return;
 		}
@@ -99,7 +99,7 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.saveNote', (comment: NoteComment) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.saveNote', (comment: NoteComment) => {
 		if (!comment.parent) {
 			return;
 		}
@@ -114,7 +114,7 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.editNote', (comment: NoteComment) => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.editNote', (comment: NoteComment) => {
 		if (!comment.parent) {
 			return;
 		}
@@ -128,7 +128,7 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('mywiki.dispose', () => {
+	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.dispose', () => {
 		commentController.dispose();
 	}));
 

@@ -1,4 +1,10 @@
-# Commenting API Example
+# VS Code Grading Feedback Extension
+
+A VS Code extension that uses the Comments API to easily create, reuse and manage grading feedback on code assignments.
+
+## Origianl Commenting API Example
+
+Code was started from VS Code's extension [example on using the Comments API](https://github.com/microsoft/vscode-extension-samples/tree/main/comment-sample)
 
 This sample shows
 

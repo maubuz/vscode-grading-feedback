@@ -1,14 +1,14 @@
 {
-	"name": "vscode-comment-api-example",
-	"displayName": "Comment API Sample",
-	"description": "Comment API Sample",
+	"name": "vscode-grading-feedback",
+	"displayName": "Grading Feedback",
+	"description": "Grading Feedback",
 	"version": "0.0.1",
-	"publisher": "vscode-samples",
+	"publisher": "maujac",
 	"private": true,
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/maujac/vscode-grading-feedback"
 	},
 	"engines": {
 		"vscode": "^1.65.0"
@@ -23,17 +23,17 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "mywiki.createNote",
+				"command": "grading_feedback.createNote",
 				"title": "Create Note",
 				"enablement": "!commentIsEmpty"
 			},
 			{
-				"command": "mywiki.replyNote",
+				"command": "grading_feedback.replyNote",
 				"title": "Reply",
 				"enablement": "!commentIsEmpty"
 			},
 			{
-				"command": "mywiki.editNote",
+				"command": "grading_feedback.editNote",
 				"title": "Edit",
 				"icon": {
 					"dark": "resources/edit_inverse.svg",
@@ -41,7 +41,7 @@
 				}
 			},
 			{
-				"command": "mywiki.deleteNote",
+				"command": "grading_feedback.deleteNote",
 				"title": "Delete",
 				"icon": {
 					"dark": "resources/close_inverse.svg",
@@ -49,7 +49,7 @@
 				}
 			},
 			{
-				"command": "mywiki.deleteNoteComment",
+				"command": "grading_feedback.deleteNoteComment",
 				"title": "Delete",
 				"icon": {
 					"dark": "resources/close_inverse.svg",
@@ -57,95 +57,95 @@
 				}
 			},
 			{
-				"command": "mywiki.saveNote",
+				"command": "grading_feedback.saveNote",
 				"title": "Save"
 			},
 			{
-				"command": "mywiki.cancelsaveNote",
+				"command": "grading_feedback.cancelsaveNote",
 				"title": "Cancel"
 			},
 			{
-				"command": "mywiki.startDraft",
+				"command": "grading_feedback.startDraft",
 				"title": "Start Draft",
 				"enablement": "!commentIsEmpty"
 			},
 			{
-				"command": "mywiki.finishDraft",
+				"command": "grading_feedback.finishDraft",
 				"title": "Finish Draft"
 			},
 			{
-				"command": "mywiki.dispose",
+				"command": "grading_feedback.dispose",
 				"title": "Remove All Notes"
 			}
 		],
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "mywiki.createNote",
+					"command": "grading_feedback.createNote",
 					"when": "false"
 				},
 				{
-					"command": "mywiki.replyNote",
+					"command": "grading_feedback.replyNote",
 					"when": "false"
 				},
 				{
-					"command": "mywiki.deleteNote",
+					"command": "grading_feedback.deleteNote",
 					"when": "false"
 				},
 				{
-					"command": "mywiki.deleteNoteComment",
+					"command": "grading_feedback.deleteNoteComment",
 					"when": "false"
 				}
 			],
 			"comments/commentThread/title": [
 				{
-					"command": "mywiki.deleteNote",
+					"command": "grading_feedback.deleteNote",
 					"group": "navigation",
 					"when": "commentController == comment-sample && !commentThreadIsEmpty"
 				}
 			],
 			"comments/commentThread/context": [
 				{
-					"command": "mywiki.createNote",
+					"command": "grading_feedback.createNote",
 					"group": "inline",
 					"when": "commentController == comment-sample && commentThreadIsEmpty"
 				},
 				{
-					"command": "mywiki.replyNote",
+					"command": "grading_feedback.replyNote",
 					"group": "inline",
 					"when": "commentController == comment-sample && !commentThreadIsEmpty"
 				},
 				{
-					"command": "mywiki.startDraft",
+					"command": "grading_feedback.startDraft",
 					"group": "inline",
 					"when": "commentController == comment-sample && commentThreadIsEmpty"
 				},
 				{
-					"command": "mywiki.finishDraft",
+					"command": "grading_feedback.finishDraft",
 					"group": "inline",
 					"when": "commentController == comment-sample && commentThread == draft"
 				}
 			],
 			"comments/comment/title": [
 				{
-					"command": "mywiki.editNote",
+					"command": "grading_feedback.editNote",
 					"group": "group@1",
 					"when": "commentController == comment-sample"
 				},
 				{
-					"command": "mywiki.deleteNoteComment",
+					"command": "grading_feedback.deleteNoteComment",
 					"group": "group@2",
 					"when": "commentController == comment-sample && comment == canDelete"
 				}
 			],
 			"comments/comment/context": [
 				{
-					"command": "mywiki.cancelsaveNote",
+					"command": "grading_feedback.cancelsaveNote",
 					"group": "inline@1",
 					"when": "commentController == comment-sample"
 				},
 				{
-					"command": "mywiki.saveNote",
+					"command": "grading_feedback.saveNote",
 					"group": "inline@2",
 					"when": "commentController == comment-sample"
 				}
