@@ -1,6 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import { createQuestion, listQuestionsToConsole } from './feedbackController';
 
 let commentId = 1;
 
@@ -9,6 +10,7 @@ class NoteComment implements vscode.Comment {
 	label: string | undefined;
 	savedBody: string | vscode.MarkdownString; // for the Cancel button
 	constructor(
+		// Using parameter properties shorthand
 		public body: string | vscode.MarkdownString,
 		public mode: vscode.CommentMode,
 		public author: vscode.CommentAuthorInformation,
@@ -32,6 +34,27 @@ export function activate(context: vscode.ExtensionContext) {
 			return [new vscode.Range(0, 0, lineCount - 1, 0)];
 		}
 	};
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.createQuetion",
+			async () => {
+				console.log("Asking user to create question");
+				createQuestion();
+			},
+		),
+	);
+
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.listQuetions",
+			() => {
+				console.log("Listing created questions");
+				listQuestionsToConsole();
+			},
+		),
+	);
 
 	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.createNote', (reply: vscode.CommentReply) => {
 		replyNote(reply);

@@ -23,9 +23,20 @@
 	"contributes": {
 		"commands": [
 			{
+				"command": "grading_feedback.createQuetion",
+				"title": "Create Question",
+				"category": "Feedback"
+			},
+			{
+				"command": "grading_feedback.listQuetions",
+				"title": "List Questions",
+				"category": "Feedback"
+			},
+			{
 				"command": "grading_feedback.createNote",
 				"title": "Create Note",
-				"enablement": "!commentIsEmpty"
+				"enablement": "!commentIsEmpty",
+				"category": "Feedback"
 			},
 			{
 				"command": "grading_feedback.replyNote",
@@ -80,6 +91,14 @@
 		],
 		"menus": {
 			"commandPalette": [
+				{
+					"command": "grading_feedback.createQuetion",
+					"when": "true"
+				},
+				{
+					"command": "grading_feedback.listQuetions",
+					"when": "true"
+				},
 				{
 					"command": "grading_feedback.createNote",
 					"when": "false"
