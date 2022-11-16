@@ -17,4 +17,15 @@ export class SpecificFeedback {
 	) {
 		this.specificFeedbackId = generateSpecificFeedbackId();
 	}
+
+	static FromJSON(rawFeedback: any): SpecificFeedback {
+		const newSpecificFeedback = new SpecificFeedback(
+			rawFeedback.parentFeedbackId,
+			rawFeedback.points,
+			rawFeedback.specificText
+		);
+		newSpecificFeedback.specificFeedbackId = rawFeedback.specificFeedbackId;
+
+		return newSpecificFeedback;
+	}
 }

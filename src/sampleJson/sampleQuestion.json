@@ -1,0 +1,39 @@
+{
+	"questions": [
+		{
+			"title": "First Question",
+			"id": "Q1",
+			"totalPoints": 2,
+			"generalFeedback": [
+				{
+					"parentQuestionId": "Q1",
+					"generalFeedbackText": "General Feedback 1.1",
+					"questionPoints": -0.5,
+					"feedbackId": 1,
+					"specificFeedback": []
+				},
+				{
+					"parentQuestionId": "Q1",
+					"generalFeedbackText": "General Feedback 1.2",
+					"questionPoints": -0.75,
+					"feedbackId": 2,
+					"specificFeedback": []
+				}
+			]
+		},
+		{
+			"title": "Second Question",
+			"id": "Q2",
+			"totalPoints": 3,
+			"generalFeedback": [
+				{
+					"parentQuestionId": "Q2",
+					"generalFeedbackText": "General Feedback 2.1",
+					"questionPoints": -0.25,
+					"feedbackId": 3,
+					"specificFeedback": []
+				}
+			]
+		}
+	]
+}

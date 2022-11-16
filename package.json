@@ -42,6 +42,12 @@
 				"title": "Select General Feedback from List",
 				"category": "Feedback"
 			},
+
+			{
+				"command": "grading_feedback.readJsonQuestions",
+				"title": "Read Feedback Questions from Json File",
+				"category": "Feedback"
+			},
 			{
 				"command": "grading_feedback.createNote",
 				"title": "Create Note",
@@ -115,6 +121,10 @@
 				},
 				{
 					"command": "grading_feedback.selectGeneralFeedback",
+					"when": "true"
+				},
+				{
+					"command": "grading_feedback.readJsonQuestions",
 					"when": "true"
 				},
 				{

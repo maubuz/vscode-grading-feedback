@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import { createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
+import { readJsonQuestions } from "./utils/jsonQuestionParser";
 
 let commentId = 1;
 
@@ -68,6 +69,15 @@ export function activate(context: vscode.ExtensionContext) {
 			async () => {
 				console.log("Select feedback from a list");
 				selectGeneralFeedback();
+			},
+		),
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.readJsonQuestions",
+			async () => {
+				console.log("Read Feedback Questions from Json File ");
+				readJsonQuestions();
 			},
 		),
 	);

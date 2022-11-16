@@ -24,6 +24,21 @@ export class GeneralFeedback {
 		this.feedbackId = generateGeneralFeedbackId();
 		this.specificFeedback = [];
 	}
+
+	static FromJSON(rawFeedback: any): GeneralFeedback {
+		const newGeneralFeedback = new GeneralFeedback(
+			rawFeedback.parentQuestionId,
+			rawFeedback.generalFeedback,
+			rawFeedback.questionPoints
+		);
+		newGeneralFeedback.feedbackId = rawFeedback.feedbackId;
+
+		newGeneralFeedback.specificFeedback = rawFeedback.specificFeedback.map((rawSpecificFeedback: any) =>{
+			return SpecificFeedback.FromJSON(rawSpecificFeedback);
+		});
+		// newGeneralFeedback.specificFeedback = new SpecificFeedback.FromJSON(feedback.specificFeedback)
+		return newGeneralFeedback;
+	}
 }
 
 /**

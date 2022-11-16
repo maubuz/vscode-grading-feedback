@@ -6,7 +6,8 @@
 		"outDir": "out",
 		"sourceMap": true,
 		"strict": true,
-		"rootDir": "src"
+		"rootDir": "src",
+		"resolveJsonModule": true  // read json file directly as object
 	},
 	"exclude": ["node_modules", ".vscode-test"]
 }

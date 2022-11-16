@@ -18,6 +18,19 @@ export class Question {
 	) {
 		this.generalFeedback = [];
 	}
+
+	static FromJSON(rawQuestion: any): Question{
+		const newQuestion = new Question(
+			rawQuestion.title,
+			rawQuestion.id,
+			rawQuestion.totalPoints
+		);
+		newQuestion.generalFeedback = rawQuestion.generalFeedback.map((rawFeedback: any) => {
+			return GeneralFeedback.FromJSON(rawFeedback);
+		});
+		
+		return newQuestion;
+	}
 }
 
 /**
