@@ -38,6 +38,11 @@
 				"category": "Feedback"
 			},
 			{
+				"command": "grading_feedback.selectGeneralFeedback",
+				"title": "Select General Feedback from List",
+				"category": "Feedback"
+			},
+			{
 				"command": "grading_feedback.createNote",
 				"title": "Create Note",
 				"enablement": "!commentIsEmpty",
@@ -106,6 +111,10 @@
 				},
 				{
 					"command": "grading_feedback.createGeneralFeedback",
+					"when": "true"
+				},
+				{
+					"command": "grading_feedback.selectGeneralFeedback",
 					"when": "true"
 				},
 				{

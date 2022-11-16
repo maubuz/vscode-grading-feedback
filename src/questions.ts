@@ -44,4 +44,20 @@ export async function buildQuestion(): Promise<Question | undefined> {
 	return question;
 }
 
-// )
+export async function questionQuickPick( existingQuestions: Question[], selectionText: string ): Promise<Question | undefined> {
+	
+	// Map question array to QuickPickItem array
+	const feedbackPickItems: vscode.QuickPickItem[] = existingQuestions.map(question => (
+		{ label: question.id }
+	));
+	// TODO: Add questions on the fly, similar to General Feedback
+	const pick = await vscode.window.showQuickPick(feedbackPickItems,
+		{
+			title: selectionText,
+			placeHolder: selectionText 
+		}
+	);
+	if(pick){
+		return existingQuestions.find(question => question.id === pick.label );
+	}
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { createGeneralFeedback, createQuestion, listQuestionsToConsole } from './feedbackController';
+import { createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
 
 let commentId = 1;
 
@@ -59,6 +59,15 @@ export function activate(context: vscode.ExtensionContext) {
 			async () => {
 				console.log("Asking user to create general feedback");
 				createGeneralFeedback();
+			},
+		),
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.selectGeneralFeedback",
+			async () => {
+				console.log("Select feedback from a list");
+				selectGeneralFeedback();
 			},
 		),
 	);
