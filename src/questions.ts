@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import { GeneralFeedback } from './generalFeedback';
+import { getTextInput } from './utils/userInput';
 
 export class Question {
 
@@ -12,7 +13,7 @@ export class Question {
 	// Using parameter properties shorthand
 	constructor(
 		public title: string,
-		public questionId: string,
+		public id: string,
 		public totalPoints: number,
 	) {
 		this.generalFeedback = [];
@@ -21,19 +22,17 @@ export class Question {
 
 /**
  * Guides user throught the creation of a new question. Question id can be any string.
- * @returns empty promise
+ * @returns question promise or empty promise if creation is aborted (press Esc)
  */
-// TODO: should this return a boolean? Add typing for returning an empty promisse.
 export async function buildQuestion(): Promise<Question | undefined> {
-	// async createQuestion(): Promise<Question | undefined> {
 
-	const questionId = await getInput("Enter question number", "Q1");
-	const title = await getInput("Enter question title", "First Question");
+	const questionId = await getTextInput("Enter question number", "Q1");
+	const title = await getTextInput("Enter question title", "First Question");
 
-	let points = await getInput("Enter question total points", "2");
+	let points = await getTextInput("Enter question total points", "2");
 	// Ensure floating point
 	while (isNaN(parseFloat(points)) && points != "") {
-		points = await getInput("Invalid number. Enter question points", "2");
+		points = await getTextInput("Invalid number. Enter question points", "2");
 	}
 
 	// If user hits Enter or Esc on prompt, we get an empty string. Abort the process.
@@ -45,18 +44,4 @@ export async function buildQuestion(): Promise<Question | undefined> {
 	return question;
 }
 
-async function getInput(inputQuestion: string, preFilledText: string): Promise<string> {
-	// async getInput(inputQuestion: string, preFilledText: string): Promise<string> {
-	const editor = vscode.window.activeTextEditor;
-	if (editor == undefined) throw new Error("Editor is undefined");
-
-	// TODO: Improve UX with InputBox.
-
-	const annotationText = await vscode.window.showInputBox({
-		title: inputQuestion,
-		placeHolder: inputQuestion,
-		value: preFilledText,
-	});
-	return annotationText ? annotationText : "";
-}
 // )
