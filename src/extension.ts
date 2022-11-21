@@ -1,9 +1,10 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
+import { addNewQuestions, createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
 import { readJsonQuestions } from "./utils/jsonQuestionParser";
 import { setupGradingEnvironment } from "./envSetup";
+import { json } from 'stream/consumers';
 
 let commentId = 1;
 
@@ -78,7 +79,17 @@ export function activate(context: vscode.ExtensionContext) {
 			"grading_feedback.readJsonQuestions",
 			async () => {
 				console.log("Read Feedback Questions from Json File ");
-				readJsonQuestions();
+				const jsonQuestions = await readJsonQuestions();
+				addNewQuestions(jsonQuestions);
+			},
+		),
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.setupGradingEnvironment",
+			() => {
+				console.log("Dummy setup function activated");
+				setupGradingEnvironment();
 			},
 		),
 	);

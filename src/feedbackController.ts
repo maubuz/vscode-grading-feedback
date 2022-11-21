@@ -16,6 +16,10 @@ export function listQuestionsToConsole() {
 	});
 }
 
+export function addNewQuestions(newQuestions: Question[]): void{
+	questions.push(...newQuestions);
+}
+
 export async function createQuestion() {
 	const question = await buildQuestion();
 	if (question) questions.push(question);
