@@ -49,6 +49,11 @@
 				"category": "Feedback"
 			},
 			{
+				"command": "grading_feedback.setupGradingEnvironment",
+				"title": "Setup Grading Environment",
+				"category": "Feedback"
+			},
+			{
 				"command": "grading_feedback.createNote",
 				"title": "Create Note",
 				"enablement": "!commentIsEmpty",
@@ -125,6 +130,10 @@
 				},
 				{
 					"command": "grading_feedback.readJsonQuestions",
+					"when": "true"
+				},
+				{
+					"command": "grading_feedback.setupGradingEnvironment",
 					"when": "true"
 				},
 				{
