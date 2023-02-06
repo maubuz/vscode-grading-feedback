@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { addNewQuestions, createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
 import { readJsonQuestions } from "./utils/jsonQuestionParser";
-import { setupGradingEnvironment } from "./envSetup";
+import { setupGradingEnvironment } from "./externalBindings";
 import { json } from 'stream/consumers';
 
 let commentId = 1;

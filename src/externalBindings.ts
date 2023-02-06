@@ -7,7 +7,8 @@ export function setupGradingEnvironment() {
 
 	const commands: string[] = [
 		"echo 'Setting up feedback environment. Executing commands below.'",
-		"git clone git@github.com:ianclement/grading-tools.git",
+		"git clone -b vscode-integration git@github.com:maujac/grading-tools.git",
+		"./grading-tools/correct/correct init"
 	];
 
 	const terminal = vscode.window.createTerminal(
