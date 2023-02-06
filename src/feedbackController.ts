@@ -16,7 +16,11 @@ export function listQuestionsToConsole() {
 	});
 }
 
-export function addNewQuestions(newQuestions: Question[]): void{
+export function emptyQuestions():boolean {
+	return (questions.length == 0);
+}
+
+export function addNewQuestions(newQuestions: Question[]): void {
 	questions.push(...newQuestions);
 }
 
