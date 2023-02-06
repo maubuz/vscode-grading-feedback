@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { addNewQuestions, createGeneralFeedback, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
 import { readJsonQuestions } from "./utils/jsonQuestionParser";
-import { setupGradingEnvironment } from "./externalBindings";
+import { setupGradingEnvironment, loadGeneralFeedbackFromCSV } from "./externalBindings";
 import { json } from 'stream/consumers';
 
 let commentId = 1;
@@ -88,8 +88,17 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(
 			"grading_feedback.setupGradingEnvironment",
 			() => {
-				console.log("Dummy setup function activated");
+				console.log("Setting up environment for grading tools");
 				setupGradingEnvironment();
+			},
+		),
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			"grading_feedback.loadCSVQuetions",
+			() => {
+				console.log("Loading General Feedback Questions from CSV file");
+				loadGeneralFeedbackFromCSV();
 			},
 		),
 	);

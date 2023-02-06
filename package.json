@@ -54,6 +54,11 @@
 				"category": "Feedback"
 			},
 			{
+				"command": "grading_feedback.loadCSVQuetions",
+				"title": "Load General Feedback Questions from CSV file",
+				"category": "Feedback"
+			},
+			{
 				"command": "grading_feedback.createNote",
 				"title": "Create Note",
 				"enablement": "!commentIsEmpty",
@@ -134,6 +139,10 @@
 				},
 				{
 					"command": "grading_feedback.setupGradingEnvironment",
+					"when": "true"
+				},
+				{
+					"command": "grading_feedback.loadCSVQuetions",
 					"when": "true"
 				},
 				{
