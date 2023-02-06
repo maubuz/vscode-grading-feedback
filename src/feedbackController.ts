@@ -31,19 +31,25 @@ function findQuestionFromId(questionId: string): Question | undefined {
 }
 
 export async function createGeneralFeedback() {
-	const question = await questionQuickPick(questions, "Select question Id of parent question");
-	if (question) {
-		const newGeneralFeedback = await buildGeneralFeedback(question.id);
-		if (!newGeneralFeedback) vscode.window.showErrorMessage("Feedback creation aborted");
-		else {
-			question.generalFeedback.push(newGeneralFeedback);
-		}
-	} else vscode.window.showErrorMessage("No question found with provided Id.");
+	if (questions.length == 0) vscode.window.showErrorMessage("No available questions. First create a question");
+	else {
+		const question = await questionQuickPick(questions, "Select question Id of parent question");
+		if (question) {
+			const newGeneralFeedback = await buildGeneralFeedback(question.id);
+			if (!newGeneralFeedback) vscode.window.showErrorMessage("Feedback creation aborted");
+			else {
+				question.generalFeedback.push(newGeneralFeedback);
+			}
+		} else vscode.window.showErrorMessage("No question found with provided Id.");
+	}
 }
 export async function selectGeneralFeedback() {
-	const question = await questionQuickPick(questions, "Select question");
-	if (question) {
-		const selectedFeedback = await selectFeedbackFromList(question.id, question.generalFeedback);
-		if (selectedFeedback) vscode.window.showInformationMessage(selectedFeedback.generalFeedbackText);
+	if (questions.length == 0) vscode.window.showErrorMessage("No available questions. First create a question");
+	else {
+		const question = await questionQuickPick(questions, "Select question");
+		if (question) {
+			const selectedFeedback = await selectFeedbackFromList(question.id, question.generalFeedback);
+			if (selectedFeedback) vscode.window.showInformationMessage(selectedFeedback.generalFeedbackText);
+		}
 	}
 }
