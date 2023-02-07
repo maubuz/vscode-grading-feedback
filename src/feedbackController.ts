@@ -3,8 +3,8 @@
 import * as vscode from 'vscode';
 import { Question, buildQuestion, questionQuickPick, readJsonQuestions } from './questions';
 import { Student } from './student';
-import { GeneralFeedback, buildGeneralFeedback, selectFeedbackFromList } from './generalFeedback';
-import { read } from 'fs';
+import { buildGeneralFeedback, selectFeedbackFromList } from './generalFeedback';
+import { join } from 'path';
 
 const questions: Question[] = [];
 let students: Student[];
@@ -21,14 +21,21 @@ function addQuestionsToMemory(newQuestions: Question[]): void {
 	questions.push(...newQuestions);
 }
 
-export async function loadJsonQuestions() {
+export function loadJsonQuestions() {
 	// TODO: Create new function to append new questions based on CSV file
 	// if (questions.length == 0) {
 	// 	const answer = await vscode.window.showInformationMessage("New questions from json might create duplicates.", "Yes", "No");
 	// 	if (answer === "No") return;
 	// }
-	const jsonQuestions = readJsonQuestions();
-	addQuestionsToMemory(jsonQuestions);
+
+	// TODO: Don't hardcode, read from extension configuration
+	const fileName = 'questions.json';
+	if (vscode.workspace.workspaceFolders) {
+		const workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+		const filePath = join(workspacePath, fileName);
+		const jsonQuestions = readJsonQuestions(filePath);
+		addQuestionsToMemory(jsonQuestions);
+	}
 }
 
 export async function createQuestion() {

@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand(
 			"grading_feedback.createQuetion",
-			async () => {
+			() => {
 				console.log("Asking user to create question");
 				createQuestion();
 			},

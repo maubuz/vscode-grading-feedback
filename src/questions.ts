@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { GeneralFeedback } from './generalFeedback';
 import { getTextInput } from './utils/userInput';
-import * as jsonQuestions from './sampleJson/sampleQuestion.json';
+import * as fs from 'fs';
 
 export class Question {
 
@@ -20,7 +20,7 @@ export class Question {
 		this.generalFeedback = [];
 	}
 
-	static FromJSON(rawQuestion: any): Question{
+	static FromJSON(rawQuestion: any): Question {
 		const newQuestion = new Question(
 			rawQuestion.title,
 			rawQuestion.id,
@@ -29,7 +29,7 @@ export class Question {
 		newQuestion.generalFeedback = rawQuestion.generalFeedback.map((rawFeedback: any) => {
 			return GeneralFeedback.FromJSON(rawFeedback);
 		});
-		
+
 		return newQuestion;
 	}
 }
@@ -58,8 +58,8 @@ export async function buildQuestion(): Promise<Question | undefined> {
 	return question;
 }
 
-export async function questionQuickPick( existingQuestions: Question[], selectionText: string ): Promise<Question | undefined> {
-	
+export async function questionQuickPick(existingQuestions: Question[], selectionText: string): Promise<Question | undefined> {
+
 	// Map question array to QuickPickItem array
 	const feedbackPickItems: vscode.QuickPickItem[] = existingQuestions.map(question => (
 		{ label: question.id }
@@ -68,32 +68,37 @@ export async function questionQuickPick( existingQuestions: Question[], selectio
 	const pick = await vscode.window.showQuickPick(feedbackPickItems,
 		{
 			title: selectionText,
-			placeHolder: selectionText 
+			placeHolder: selectionText
 		}
 	);
-	if(pick){
-		return existingQuestions.find(question => question.id === pick.label );
+	if (pick) {
+		return existingQuestions.find(question => question.id === pick.label);
 	}
 }
 
-export function readJsonQuestions(): Question[] {
+export function readJsonQuestions(filePath: string): Question[] {
 
 	const loadedQuestions: Question[] = [];
 
-	jsonQuestions.questions.forEach(question => {
-		console.log(JSON.stringify(question, null, 2));
+	if (fs.existsSync(filePath)) {
+		const bufferData = fs.readFileSync(filePath);
+		const jsonQuestions = JSON.parse(bufferData.toString());
 
-		try {
-			loadedQuestions.push(Question.FromJSON(question));
+		for (const question of jsonQuestions.questions) {
+			console.log(JSON.stringify(question, null, 2));
 
-			console.log("Loaded questions");
-			loadedQuestions.forEach(question => {
-				console.log(JSON.stringify(question, null, 2));
-			});
+			try {
+				loadedQuestions.push(Question.FromJSON(question));
 
-		} catch (error) {
-			vscode.window.showErrorMessage("Failed to load json file");
+				console.log("Loaded questions");
+				loadedQuestions.forEach(question => {
+					console.log(JSON.stringify(question, null, 2));
+				});
+
+			} catch (error) {
+				vscode.window.showErrorMessage("Failed to load json file");
+			}
 		}
-	});
+	}
 	return loadedQuestions;
 }

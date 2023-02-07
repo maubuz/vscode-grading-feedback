@@ -11,9 +11,9 @@ function generateSpecificFeedbackId() {
 export class SpecificFeedback {
 	specificFeedbackId: number;
 	constructor(
-		parentFeedbackId: number,
-		points: number,
-		specificText: string | vscode.MarkdownString,
+		private parentFeedbackId: number,
+		private points: number,
+		private specificText: string | vscode.MarkdownString,
 	) {
 		this.specificFeedbackId = generateSpecificFeedbackId();
 	}
