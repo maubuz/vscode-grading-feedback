@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import { GeneralFeedback } from './generalFeedback';
 import { getTextInput } from './utils/userInput';
+import * as jsonQuestions from './sampleJson/sampleQuestion.json';
 
 export class Question {
 
@@ -73,4 +74,26 @@ export async function questionQuickPick( existingQuestions: Question[], selectio
 	if(pick){
 		return existingQuestions.find(question => question.id === pick.label );
 	}
+}
+
+export function readJsonQuestions(): Question[] {
+
+	const loadedQuestions: Question[] = [];
+
+	jsonQuestions.questions.forEach(question => {
+		console.log(JSON.stringify(question, null, 2));
+
+		try {
+			loadedQuestions.push(Question.FromJSON(question));
+
+			console.log("Loaded questions");
+			loadedQuestions.forEach(question => {
+				console.log(JSON.stringify(question, null, 2));
+			});
+
+		} catch (error) {
+			vscode.window.showErrorMessage("Failed to load json file");
+		}
+	});
+	return loadedQuestions;
 }

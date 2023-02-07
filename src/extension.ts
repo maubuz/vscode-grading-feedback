@@ -1,8 +1,8 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { addNewQuestions, createGeneralFeedback, emptyQuestions, createQuestion, listQuestionsToConsole, selectGeneralFeedback } from './feedbackController';
-import { readJsonQuestions } from "./utils/jsonQuestionParser";
+import { createGeneralFeedback, createQuestion,
+	listQuestionsToConsole, selectGeneralFeedback, loadJsonQuestions } from './feedbackController';
 import { setupGradingEnvironment, loadGeneralFeedbackFromCSV } from "./externalBindings";
 import { CommentsAPI } from './commentsAPI';
 
@@ -63,13 +63,8 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(
 			"grading_feedback.readJsonQuestions",
 			async () => {
-				console.log("Read Feedback Questions from Json File ");
-				const jsonQuestions = await readJsonQuestions();
-				if (!emptyQuestions()) {
-					const answer = await vscode.window.showInformationMessage("New questions from json might create duplicates.", "Yes", "No");
-					if (answer === "No") return;
-				}
-				addNewQuestions(jsonQuestions);
+				console.log("Load Feedback Questions from Json File ");
+				loadJsonQuestions();
 			},
 		),
 	);

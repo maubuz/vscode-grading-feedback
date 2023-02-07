@@ -1,9 +1,10 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { Question, buildQuestion, questionQuickPick } from './questions';
+import { Question, buildQuestion, questionQuickPick, readJsonQuestions } from './questions';
 import { Student } from './student';
 import { GeneralFeedback, buildGeneralFeedback, selectFeedbackFromList } from './generalFeedback';
+import { read } from 'fs';
 
 const questions: Question[] = [];
 let students: Student[];
@@ -16,12 +17,18 @@ export function listQuestionsToConsole() {
 	});
 }
 
-export function emptyQuestions():boolean {
-	return (questions.length == 0);
+function addQuestionsToMemory(newQuestions: Question[]): void {
+	questions.push(...newQuestions);
 }
 
-export function addNewQuestions(newQuestions: Question[]): void {
-	questions.push(...newQuestions);
+export async function loadJsonQuestions() {
+	// TODO: Create new function to append new questions based on CSV file
+	// if (questions.length == 0) {
+	// 	const answer = await vscode.window.showInformationMessage("New questions from json might create duplicates.", "Yes", "No");
+	// 	if (answer === "No") return;
+	// }
+	const jsonQuestions = readJsonQuestions();
+	addQuestionsToMemory(jsonQuestions);
 }
 
 export async function createQuestion() {
