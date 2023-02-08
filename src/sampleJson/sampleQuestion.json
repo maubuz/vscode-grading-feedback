@@ -21,8 +21,7 @@
 						{
 							"specificFeedbackId": 88,
 							"parentFeedbackId" : 2,
-							"points": -0.5,
-							"specificText": "Test specific feedbac"
+							"studentNumber": "1234678"
 						}
 					]
 				}

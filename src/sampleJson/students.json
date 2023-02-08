@@ -1,0 +1,19 @@
+{
+    "students": [
+        {
+            "studentNumber": "1265406",
+            "lastName": "Comane",
+            "timestamp": "2022-09-22_13h08m"
+        },
+        {
+            "studentNumber": "2371168",
+            "lastName": "Liu",
+            "timestamp": "2022-09-22_21h37m"
+        },
+        {
+            "studentNumber": "2129876",
+            "lastName": "Smith",
+            "timestamp": "2022-10-26_00h05m"
+        }
+    ]
+}

@@ -7,7 +7,10 @@ export class Student {
 
 	studentFeedback: SpecificFeedback[];
 	constructor(
-		public studentNumber: number
+		private firstName: string,
+		private lastName: string,
+		public studentNumber: string
+
 	) {
 		this.studentFeedback = [];
 	}

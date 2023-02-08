@@ -12,8 +12,9 @@ export class SpecificFeedback {
 	specificFeedbackId: number;
 	constructor(
 		private parentFeedbackId: number,
-		private points: number,
-		private specificText: string | vscode.MarkdownString,
+		private studentNumber: string,
+		// private points: number,
+		// private specificText: string | vscode.MarkdownString,
 	) {
 		this.specificFeedbackId = generateSpecificFeedbackId();
 	}
@@ -21,8 +22,9 @@ export class SpecificFeedback {
 	static FromJSON(rawFeedback: any): SpecificFeedback {
 		const newSpecificFeedback = new SpecificFeedback(
 			rawFeedback.parentFeedbackId,
-			rawFeedback.points,
-			rawFeedback.specificText
+			rawFeedback.studentNumber,	
+			// rawFeedback.points,
+			// rawFeedback.specificText
 		);
 		newSpecificFeedback.specificFeedbackId = rawFeedback.specificFeedbackId;
 
