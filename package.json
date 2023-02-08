@@ -49,13 +49,8 @@
 				"category": "Feedback"
 			},
 			{
-				"command": "grading_feedback.setupGradingEnvironment",
-				"title": "Setup Grading Environment",
-				"category": "Feedback"
-			},
-			{
-				"command": "grading_feedback.loadCSVQuetions",
-				"title": "Load General Feedback Questions from CSV file",
+				"command": "grading_feedback.chooseSetupTask",
+				"title": "Choose setup task for grading environment",
 				"category": "Feedback"
 			},
 			{
@@ -138,11 +133,7 @@
 					"when": "true"
 				},
 				{
-					"command": "grading_feedback.setupGradingEnvironment",
-					"when": "true"
-				},
-				{
-					"command": "grading_feedback.loadCSVQuetions",
+					"command": "grading_feedback.chooseSetupTask",
 					"when": "true"
 				},
 				{

@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { createGeneralFeedback, createQuestion,
 	listQuestionsToConsole, selectGeneralFeedback, loadJsonQuestions } from './feedbackController';
-import { setupGradingEnvironment, loadGeneralFeedbackFromCSV } from "./externalBindings";
+import { chooseSetupTask } from "./externalBindings";
 import { CommentsAPI } from './commentsAPI';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -70,22 +70,22 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	context.subscriptions.push(
 		vscode.commands.registerCommand(
-			"grading_feedback.setupGradingEnvironment",
+			"grading_feedback.chooseSetupTask",
 			() => {
-				console.log("Setting up environment for grading tools");
-				setupGradingEnvironment();
+				console.log("Choose setup task for grading tool environment");
+				chooseSetupTask();
 			},
 		),
 	);
-	context.subscriptions.push(
-		vscode.commands.registerCommand(
-			"grading_feedback.loadCSVQuetions",
-			() => {
-				console.log("Loading General Feedback Questions from CSV file");
-				loadGeneralFeedbackFromCSV();
-			},
-		),
-	);
+	// context.subscriptions.push(
+	// 	vscode.commands.registerCommand(
+	// 		"grading_feedback.loadCSVQuetions",
+	// 		() => {
+	// 			console.log("Loading General Feedback Questions from CSV file");
+	// 			loadGeneralFeedbackFromCSV();
+	// 		},
+	// 	),
+	// );
 	context.subscriptions.push(vscode.commands.registerCommand('grading_feedback.dispose', () => {
 		commentController.dispose();
 	}));
